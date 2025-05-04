@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Learning Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Deep Learning Model Visualization</h1>
+            <div class="subtitle">Interactive Exploration of Neural Network Training Dynamics</div>
+        </header>
+        
+        <div class="panel">
+            <div class="settings-panel">
+                <div class="setting-group">
+                    <label for="model-type">Model Architecture</label>
+                    <select id="model-type">
+                        <option value="cnn">Convolutional Neural Network (CNN)</option>
+                        <option value="rnn">Recurrent Neural Network (RNN)</option>
+                        <option value="transformer">Transformer</option>
+                        <option value="mlp">Multilayer Perceptron (MLP)</option>
+                    </select>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="dataset">Dataset</label>
+                    <select id="dataset">
+                        <option value="mnist">MNIST (Digits)</option>
+                        <option value="cifar">CIFAR-10 (Objects)</option>
+                        <option value="imdb">IMDB (Sentiment)</option>
+                    </select>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="learning-rate">Learning Rate</label>
+                    <input type="range" id="learning-rate" min="0.0001" max="0.1" step="0.0001" value="0.001">
+                    <span id="lr-value">0.001</span>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="batch-size">Batch Size</label>
+                    <select id="batch-size">
+                        <option value="32">32</option>
+                        <option value="64">64</option>
+                        <option value="128">128</option>
+                        <option value="256">256</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="control-panel">
+                <button id="train-btn" class="animated-button">Train Model</button>
+                <button id="pause-btn" class="animated-button" disabled>Pause Training</button>
+                <button id="reset-btn" class="animated-button">Reset</button>
+                
+                <div style="margin-left: auto; display: flex; align-items: center;">
+                    <label class="slider-label">Dark Mode</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="dark-mode">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="training-progress"></div>
+            </div>
+            <div class="status-message" id="status-message">Ready to train model...</div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="network">Network Architecture</div>
+            <div class="tab" data-tab="training">Training Process</div>
+            <div class="tab" data-tab="features">Feature Visualization</div>
+            <div class="tab" data-tab="performance">Performance Metrics</div>
+        </div>
+        
+        <div class="tab-content active" id="network-tab">
+            <div class="panel">
+                <h2>Neural Network Architecture</h2>
+                <div class="visualization-container">
+                    <div class="neural-network" id="neural-network"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="training-tab">
+            <div class="panel">
+                <h2>Training Process</h2>
+                <div class="loss-chart">
+                    <div class="chart-line" id="loss-line"></div>
+                </div>
+                <div class="performance-metrics">
+                    <div class="metric-card">
+                        <div class="metric-label">Training Loss</div>
+                        <div class="metric-value" id="train-loss">0.000</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Validation Loss</div>
+                        <div class="metric-value" id="val-loss">0.000</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Accuracy</div>
+                        <div class="metric-value" id="accuracy">0.00%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Epoch</div>
+                        <div class="metric-value" id="epoch">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="features-tab">
+            <div class="panel">
+                <h2>Feature Maps Visualization</h2>
+                <p>Visualizing the learned features from convolutional layers</p>
+                <div class="feature-maps" id="feature-maps"></div>
+                
+                <h3 style="margin-top: 30px;">Attention Mechanism (Transformer)</h3>
+                <div class="attention-vis" id="attention-vis"></div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="performance-tab">
+            <div class="panel">
+                <h2>Model Performance</h2>
+                <h3>Confusion Matrix</h3>
+                <div class="confusion-matrix" id="confusion-matrix"></div>
+                
+                <h3 style="margin-top: 30px;">Precision-Recall Curve</h3>
+                <div class="visualization-container" style="height: 300px;">
+                    <canvas id="pr-curve" width="800" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
